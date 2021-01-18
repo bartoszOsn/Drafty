@@ -54,14 +54,19 @@ const JSConfig = {
                 loader: 'babel-loader'
             },
             {
-                test: /\.s[ac]ss$/i,
-                loader: "sass-loader"
-            },
+                test: /\.pug$/,
+                loader: 'pug-plain-loader'
+            }
         ]
     },
     plugins: [
         new VueLoaderPlugin()
-    ]
+    ],
+    resolve: {
+        alias: {
+            vue: 'vue/dist/vue.js'
+        },
+    },
 };
 
 const SASSConfig = {
