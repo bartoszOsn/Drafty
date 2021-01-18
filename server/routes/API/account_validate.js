@@ -1,15 +1,9 @@
+const {isUsernameValid, isPasswordValid} = require('./../../validation');
+
 exports.validate_login_post = function(req, res) {
-    //TODO: implement this.
-    res.json({
-        success: true,
-        message: `Username "${req.params.username}" is available.`
-    });
+    res.json(isUsernameValid(req.body.data));
 }
 
 exports.validate_password_post = function(req, res) {
-    //TODO: implement this.
-    res.json({
-        success: true,
-        message: `Password is secure.`
-    });
+    res.json(isPasswordValid(req.body.data));
 }

@@ -1,23 +1,61 @@
 <template lang="pug">
-    div.form-floating.m-3
-        input.form-control(:type="type" :id="inputId" :placeholder="placeholder")
+    div.form-floating.m-3.has-validation
+        input.form-control(
+            :type="type"
+            :id="inputId"
+            :placeholder="placeholder"
+            :class="{'is-valid': isValid && message, 'is-invalid' : !isValid && message}"
+            @input="input"
+            v-model="value"
+        )
         label(:for="inputId") {{placeholder}}
+        div(:class="isValid?'valid-feedback':'invalid-feedback'") {{message}}
 </template>
 
 <script>
 export default {
     props: {
         type: String,
-        placeholder: String
+        placeholder: String,
+        'validation-url': String
     },
     data: function(){
         return {
-            id: null
+            id: null,
+            message: null,
+            isValid: false,
+            timeoutId: null,
+            value: ''
         }
     },
     computed: {
         inputId() {
             return 'input__' + this.id;
+        }
+    },
+    methods: {
+        input() {
+            if(this.timeoutId != null) {
+                clearTimeout(this.timeoutId);
+            }
+            this.message = null;
+            this.timeoutId = setTimeout(()=> {
+                fetch(this.validationUrl, {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        data: this.value
+                    }) 
+                })
+                    .then(res=>res.json())
+                    .then(data=> {
+                        this.isValid = data.result;
+                        this.message = data.message;
+                    })
+                this.timeoutId = null;
+            }, 300);
         }
     },
     mounted() {

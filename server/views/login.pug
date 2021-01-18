@@ -7,7 +7,7 @@ html(lang="en")
         title Document
     body
         #app
-            validated-textbox(type="password", placeholder="Password")
-            validated-textbox(type="text", placeholder="Login")
+            validated-textbox(type="password", placeholder="Password", validation-url="../API/validate_password")
+            validated-textbox(type="text", placeholder="Login", validation-url="../API/validate_login")
 
         script(src="/static/scripts/login.js")
