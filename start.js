@@ -72,7 +72,8 @@ const JSConfig = {
 const SASSConfig = {
     mode: mode,
     entry: {
-        index: './client/styles/index.scss'
+        index: './client/styles/index.scss',
+        theme: './client/styles/theme.scss'
     },
     output: {
         //filename: '[name].css',

@@ -1,12 +1,11 @@
 import Vue from 'vue';
-import password from './password.vue';
+import password from './validated-textbox.vue';
 
 let app = new Vue({
     el: '#app',
     data: {
-      message: 'Hello Vue!'
     },
     components: {
-        'custom-password': password
+        'validated-textbox': password
     }
   });
