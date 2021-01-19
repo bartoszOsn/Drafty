@@ -1,4 +1,4 @@
-const {isUsernameValid, isPasswordValid} = require('./../../validation');
+const {isUsernameValid, isPasswordValid} = require('./../../../shared/validation');
 
 exports.validate_login_post = function(req, res) {
     res.json(isUsernameValid(req.body.data));

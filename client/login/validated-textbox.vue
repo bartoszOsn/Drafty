@@ -17,7 +17,7 @@ export default {
     props: {
         type: String,
         placeholder: String,
-        'validation-url': String
+        validator: Function
     },
     data: function(){
         return {
@@ -40,20 +40,19 @@ export default {
             }
             this.message = null;
             this.timeoutId = setTimeout(()=> {
-                fetch(this.validationUrl, {
-                    method: "POST",
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        data: this.value
-                    }) 
-                })
-                    .then(res=>res.json())
-                    .then(data=> {
+                //if validator returns promise, then wait for it to resolve
+                //otherwise, treat returned value as validation result.
+                let result = this.validator(this.value);
+                if(result.then) {
+                    result.then((data)=> {
                         this.isValid = data.result;
                         this.message = data.message;
-                    })
+                    });
+                }
+                else {
+                    this.isValid = result.result;
+                    this.message = result.message;
+                }
                 this.timeoutId = null;
             }, 300);
         }
