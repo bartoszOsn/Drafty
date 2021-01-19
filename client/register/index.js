@@ -21,7 +21,40 @@ let app = new Vue({
         validatePassword(password) {
             return isPasswordValid(password)
         },
-        showPassword: false
+        validateEmail(email) {
+            if(email.match(/^\S+@\S+\.\S+$/)) {
+                return {
+                    result: true,
+                    message: " "
+                };
+            }
+            return {
+                result: false,
+                message: "This is not valid E-mail address."
+            };
+        },
+        showPassword: false,
+        password: '',
+        validUsername: false,
+        validPassword: false,
+        validEmail: false,
+        validConfirmPassword: false
+    },
+    created() {
+        this.confirmPasswordValidation = (confirmPassword) => {
+            if(this.password == confirmPassword) {
+                return {
+                    result: true,
+                    message: ' '
+                }
+            }
+            else {
+                return {
+                    result: false,
+                    message: 'Type the same password as above!'
+                }
+            }
+        };
     },
     components: {
         'validated-textbox': validatedTextbox

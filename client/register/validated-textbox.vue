@@ -6,7 +6,7 @@
             :placeholder="placeholder"
             :class="{'is-valid': isValid && message, 'is-invalid' : !isValid && message}"
             @input="input"
-            v-model="value"
+            v-model="val"
         )
         label(:for="inputId") {{placeholder}}
         div(:class="isValid?'valid-feedback':'invalid-feedback'") {{message}}
@@ -17,24 +17,37 @@ export default {
     props: {
         type: String,
         placeholder: String,
-        validator: Function
+        validator: Function,
+        value: String
     },
     data: function(){
         return {
             id: null,
             message: null,
-            isValid: false,
+            dataIsValid: false,
             timeoutId: null,
-            value: ''
+            val: ''
         }
     },
     computed: {
         inputId() {
             return 'input__' + this.id;
+        },
+        isValid: {
+            get: function() {
+                return this.dataIsValid;
+            },
+            set: function(value) {
+                if(value !== this.dataIsValid) {
+                    this.dataIsValid = value;
+                    this.$emit('validation-changed', value);
+                }
+            }
         }
     },
     methods: {
         input() {
+            this.$emit('input', this.val);
             if(this.timeoutId != null) {
                 clearTimeout(this.timeoutId);
             }
@@ -42,7 +55,7 @@ export default {
             this.timeoutId = setTimeout(()=> {
                 //if validator returns promise, then wait for it to resolve
                 //otherwise, treat returned value as validation result.
-                let result = this.validator(this.value);
+                let result = this.validator(this.val);
                 if(result.then) {
                     result.then((data)=> {
                         this.isValid = data.result;

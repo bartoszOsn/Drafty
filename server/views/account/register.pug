@@ -7,13 +7,35 @@ block content
     #app
         h1.mx-3 Create account
         form(method='post')
-            validated-textbox.mx-3.mt-3.mb-3(type="text", placeholder="Username", :validator="validateUsername")
-            validated-textbox.mx-3.mb-1(:type="showPassword?'text':'password'", placeholder="Password", :validator="validatePassword")
-            validated-textbox.mx-3.mb-1(:type="showPassword?'text':'password'", placeholder="Password", :validator="validatePassword")
+            validated-textbox.mx-3.mt-3.mb-3(
+                type="text",
+                placeholder="Username",
+                :validator="validateUsername",
+                @validation-changed="validUsername = $event"
+            )
+            validated-textbox.mx-3.mb-3(
+                :type="email",
+                placeholder="Email",
+                :validator="validateEmail",
+                @validation-changed="validEmail = $event"
+            )
+            validated-textbox.mx-3.mb-3(
+                :type="showPassword?'text':'password'",
+                placeholder="Password",
+                :validator="validatePassword",
+                v-model="password",
+                @validation-changed="validPassword = $event"
+            )
+            validated-textbox.mx-3.mb-3(
+                :type="showPassword?'text':'password'",
+                placeholder="Confirm Password",
+                :validator="confirmPasswordValidation",
+                @validation-changed="validConfirmPassword = $event"
+            )
             .form-check.mx-3.mb-3
                 label.form-check-label Show password
                     input.form-check-input(type="checkbox" v-model="showPassword")
             .d-grid.mx-3.mb-3
-                button.btn-lg.btn-block(type="submit" class="btn btn-primary") Create account
+                button.btn-lg.btn-block(type="submit" class="btn btn-primary" :disabled="!validUsername || !validPassword || !validConfirmPassword") Create account
 block scripts
     script(src="/static/scripts/register.js")
