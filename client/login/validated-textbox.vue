@@ -1,5 +1,5 @@
 <template lang="pug">
-    div.form-floating.m-3.has-validation
+    div.form-floating.has-validation
         input.form-control(
             :type="type"
             :id="inputId"

@@ -7,8 +7,11 @@ html(lang="en")
         title Document
     body
         #app
-            validated-textbox(type="text", placeholder="Login", :validator="validateUsername")
-            validated-textbox(type="password", placeholder="Password", :validator="validatePassword")
-            
-
+            form(method='post')
+                validated-textbox.mx-3.mt-3.mb-1(type="text", placeholder="Login", :validator="validateUsername")
+                validated-textbox.mx-3.mb-1(:type="showPassword?'text':'password'", placeholder="Password", :validator="validatePassword")
+                .form-check.mx-3.mb-1
+                    label.form-check-label Show password?
+                        input.form-check-input(type="checkbox" v-model="showPassword")
+                button.mx-3(type="submit" class="btn btn-primary") Log in
         script(src="/static/scripts/login.js")

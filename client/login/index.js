@@ -20,7 +20,8 @@ let app = new Vue({
         },
         validatePassword(password) {
             return isPasswordValid(password)
-        }
+        },
+        showPassword: false
     },
     components: {
         'validated-textbox': password
