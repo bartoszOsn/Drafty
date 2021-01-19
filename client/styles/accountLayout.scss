@@ -2,14 +2,17 @@
 @import "./colors.scss";
 
 body {
-    $col1: color.adjust($primary, $lightness: 40%, $saturation: 50%);
-    $col2: color.adjust($secondary, $lightness: 40%, $saturation: 50%);
     margin: 0 !important;
     min-height: 100vh;
-    background-image: linear-gradient(170deg, $col1 0%, $col1 30%, $col2 70%, $col2 100%);
+    background-color: $primary;
 }
 
 .card {
     max-width: 30rem;
     min-width: 10rem;
+}
+
+.logo {
+    height: 8rem;
+    width: 100%;
 }

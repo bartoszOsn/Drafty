@@ -1,10 +1,15 @@
 body {
   margin: 0 !important;
   min-height: 100vh;
-  background-image: linear-gradient(170deg, #a4d6ff 0%, #a4d6ff 30%, #ffdfc4 70%, #ffdfc4 100%);
+  background-color: #0E75C9;
 }
 
 .card {
   max-width: 30rem;
   min-width: 10rem;
+}
+
+.logo {
+  height: 8rem;
+  width: 100%;
 }

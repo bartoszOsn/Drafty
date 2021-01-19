@@ -23,13 +23,19 @@ block head
 
 block content
     #app
+        h1.mx-3 Log in
         form(method='post')
-            validated-textbox.mx-3.mt-3.mb-1(type="text", placeholder="Login", :validator="validateUsername")
+            validated-textbox.mx-3.mt-3.mb-3(type="text", placeholder="Login", :validator="validateUsername")
             validated-textbox.mx-3.mb-1(:type="showPassword?'text':'password'", placeholder="Password", :validator="validatePassword")
-            .form-check.mx-3.mb-1
+            .form-check.mx-3.mb-3
                 label.form-check-label Show password?
                     input.form-check-input(type="checkbox" v-model="showPassword")
-            button.mx-3(type="submit" class="btn btn-primary") Log in
-
+            .d-grid.mx-3.mb-3
+                button.btn-lg.btn-block(type="submit" class="btn btn-primary") Log in
+            p.mx-3.mb-1
+                a.link-primary(href="#") Forgot password?
+            p.mx-3.mb-4
+                span Don't have account? 
+                a.link-primary(href="#") Sign up!
 block scripts
     script(src="/static/scripts/login.js")
