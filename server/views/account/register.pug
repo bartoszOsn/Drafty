@@ -1,0 +1,19 @@
+extends _layout.pug
+
+block head
+    title Create account - Drafty
+
+block content
+    #app
+        h1.mx-3 Create account
+        form(method='post')
+            validated-textbox.mx-3.mt-3.mb-3(type="text", placeholder="Username", :validator="validateUsername")
+            validated-textbox.mx-3.mb-1(:type="showPassword?'text':'password'", placeholder="Password", :validator="validatePassword")
+            validated-textbox.mx-3.mb-1(:type="showPassword?'text':'password'", placeholder="Password", :validator="validatePassword")
+            .form-check.mx-3.mb-3
+                label.form-check-label Show password
+                    input.form-check-input(type="checkbox" v-model="showPassword")
+            .d-grid.mx-3.mb-3
+                button.btn-lg.btn-block(type="submit" class="btn btn-primary") Create account
+block scripts
+    script(src="/static/scripts/register.js")

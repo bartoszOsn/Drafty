@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 
 const indexRoute = require('./routes/index');
 const loginRoute = require('./routes/login');
+const registerRoute = require('./routes/register');
 const apiRoute = require('./routes/API/index');
 
 const app = express();
@@ -17,6 +18,7 @@ app.use(bodyParser.json());
 
 app.use('/', indexRoute);
 app.use('/login', loginRoute);
+app.use('/register', registerRoute);
 app.use('/API', apiRoute);
 
 app.listen(port, () => {

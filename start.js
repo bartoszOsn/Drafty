@@ -37,7 +37,8 @@ function startServer()
 const JSConfig = {
     mode: mode,
     entry: {
-        login: './client/login/index.js'
+        login: './client/login/index.js',
+        register: './client/register/index.js'
     },
     output: {
         filename: '[name].js',
