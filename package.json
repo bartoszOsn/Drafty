@@ -16,6 +16,10 @@
     "body-parser": "^1.19.0",
     "bootstrap": "^5.0.0-beta1",
     "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "mongoose": "^5.11.12",
+    "passport": "^0.4.1",
+    "passport-local-mongoose": "^6.1.0",
     "vue": "^2.6.12"
   },
   "devDependencies": {

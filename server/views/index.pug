@@ -6,3 +6,7 @@ html(lang="en")
         link(rel="stylesheet", href="/static/styles/index.css")
     body
         h1 Drafty
+        if isLoggedIn 
+            p Hello #{user}!
+        else
+            p You are not logged in!
