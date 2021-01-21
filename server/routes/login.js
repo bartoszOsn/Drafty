@@ -2,7 +2,7 @@ var express = require('express');
 const passport = require('passport');
 var router = express.Router();
 
-/* GET main page. */
+/* GET login page. */
 router.get('/', function(req, res, next) {
     res.render('account/login');
 });
