@@ -5,6 +5,7 @@
             :id="inputId"
             :placeholder="placeholder"
             :class="{'is-valid': isValid && message, 'is-invalid' : !isValid && message}"
+            :name="name"
             @input="input"
             v-model="val"
         )
@@ -18,7 +19,8 @@ export default {
         type: String,
         placeholder: String,
         validator: Function,
-        value: String
+        value: String,
+        name: String
     },
     data: function(){
         return {

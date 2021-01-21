@@ -12,5 +12,7 @@ html(lang="en")
         .card.shadow.col-md-6
             a.mt-3.mb-1.mx-3(href="#")
                 img.logo(src="static/images/logo-full.svg", alt="Drafty")
+            if warning
+                div.alert.alert-danger(role='alert') #{warning}
             block content
         block scripts

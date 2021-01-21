@@ -10,18 +10,21 @@ block content
             validated-textbox.mx-3.mt-3.mb-3(
                 type="text",
                 placeholder="Username",
+                name="username",
                 :validator="validateUsername",
                 @validation-changed="validUsername = $event"
             )
             validated-textbox.mx-3.mb-3(
                 :type="email",
                 placeholder="Email",
+                name="email",
                 :validator="validateEmail",
                 @validation-changed="validEmail = $event"
             )
             validated-textbox.mx-3.mb-3(
                 :type="showPassword?'text':'password'",
                 placeholder="Password",
+                name="password",
                 :validator="validatePassword",
                 v-model="password",
                 @validation-changed="validPassword = $event"
@@ -29,6 +32,7 @@ block content
             validated-textbox.mx-3.mb-3(
                 :type="showPassword?'text':'password'",
                 placeholder="Confirm Password",
+                name="confirm"
                 :validator="confirmPasswordValidation",
                 @validation-changed="validConfirmPassword = $event"
             )
