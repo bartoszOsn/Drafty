@@ -5,7 +5,11 @@ const Schema = mongoose.Schema;
 const UserDetail = new Schema({
   username: String,
   email: String,
-  password: String
+  password: String,
+  screenplays: {
+      type: Array,
+      default: []
+  }
 });
 
 UserDetail.plugin(passportLocalMongoose);
