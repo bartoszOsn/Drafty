@@ -6,10 +6,19 @@ var router = express.Router();
 
 /* GET register page. */
 router.get('/', function(req, res, next) {
-  res.render('account/register');
+    if(req.user) {
+        return res.render('account/info', {
+            msgHeader: "You are logged in",
+            message: "you can't create another account.",
+            link: '/',
+            linksText: "Go back to home page"
+        });
+    }
+    res.render('account/register');
 });
 
 router.post('/', function(req, res, next) {
+
     let username = req.body.username;
     let email = req.body.email;
     let password = req.body.password;

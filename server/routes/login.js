@@ -4,7 +4,15 @@ var router = express.Router();
 
 /* GET login page. */
 router.get('/', function(req, res, next) {
-    res.render('account/login');
+    if(req.user) {
+        return res.render('account/info', {
+            msgHeader: "You are already logged in",
+            message: "If you want to log in as another user, log out first.",
+            link: '/',
+            linksText: "Go back to home page"
+        });
+    }
+    return res.render('account/login');
 });
 
 router.post('/', function(req, res, next) {

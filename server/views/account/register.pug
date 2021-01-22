@@ -39,7 +39,7 @@ block content
             .form-check.mx-3.mb-3
                 label.form-check-label Show password
                     input.form-check-input(type="checkbox" v-model="showPassword")
-            .d-grid.mx-3.mb-3
+            .d-grid.mx-3
                 button.btn-lg.btn-block(type="submit" class="btn btn-primary" :disabled="!validUsername || !validPassword || !validConfirmPassword") Create account
 block scripts
     script(src="/static/scripts/register.js")
