@@ -33,7 +33,7 @@ app.use(passport.session());
 
 /* MONGOOSE SETUP */
 const mongoose = require('mongoose');
-const { UserDetails } = require('./models/userDetail');
+const UserDetails = require('./models/userDetail');
 
 
 mongoose.connect('mongodb://localhost/MyDatabase',

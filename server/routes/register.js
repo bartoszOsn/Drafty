@@ -1,5 +1,6 @@
 var express = require('express');
 const url = require('url');
+const UserDetails = require('./../models/userDetail');
 const {isUsernameValid, isPasswordValid} = require('./../../shared/validation');
 var router = express.Router();
 
@@ -30,6 +31,11 @@ router.post('/', function(req, res, next) {
     if(warning != null) {
         return res.render('account/register', { warning });
     }
+
+    UserDetails.register({
+        username,
+        email
+    }, password);
 
     return res.redirect('/');
 });
