@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const passportLocalMongoose = require('passport-local-mongoose');
+const screenplaySchema = require('./screenplay');
 
 const Schema = mongoose.Schema;
 const UserDetail = new Schema({
@@ -7,7 +8,7 @@ const UserDetail = new Schema({
   email: String,
   password: String,
   screenplays: {
-      type: Array,
+      type: [screenplaySchema],
       default: []
   }
 });
