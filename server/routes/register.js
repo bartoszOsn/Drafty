@@ -1,10 +1,7 @@
 var express = require('express');
 const url = require('url');
-const warningMiddleware = require('./../middleware/warning');
 const {isUsernameValid, isPasswordValid} = require('./../../shared/validation');
 var router = express.Router();
-
-router.use(warningMiddleware);
 
 /* GET register page. */
 router.get('/', function(req, res, next) {
@@ -31,9 +28,7 @@ router.post('/', function(req, res, next) {
     }
 
     if(warning != null) {
-        let address = `/register?warning=${encodeURIComponent(warning)}`;
-        console.log(address);
-        return res.redirect(address);
+        return res.render('account/register', { warning });
     }
 
     return res.redirect('/');
