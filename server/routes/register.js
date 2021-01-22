@@ -1,5 +1,6 @@
 var express = require('express');
 const url = require('url');
+const passport = require('passport');
 const UserDetails = require('./../models/userDetail');
 const {isUsernameValid, isPasswordValid} = require('./../../shared/validation');
 var router = express.Router();
@@ -41,12 +42,18 @@ router.post('/', function(req, res, next) {
         return res.render('account/register', { warning });
     }
 
-    UserDetails.register({
+    let user = UserDetails.register({
         username,
         email
-    }, password);
-
-    return res.redirect('/');
+    }, password, (err, user) => {
+        if(err){
+            console.log(err);
+            return res.render("register");
+        }
+        passport.authenticate("local")(req, res, function(){
+            res.redirect("/");
+        });
+    });    
 });
 
 module.exports = router;
