@@ -4,7 +4,8 @@ block head
     title Drafty
 
 block content
-    h1.mt-3 #{msgHeader}
-    p #{message}
+    h1.my-3 #{msgHeader}
+    if message
+        p #{message}
     if link
         a(href=link)= linksText? linksText : href
