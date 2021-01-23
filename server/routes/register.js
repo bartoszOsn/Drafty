@@ -5,7 +5,9 @@ const UserDetails = require('./../models/userDetail');
 const {isUsernameValid, isPasswordValid} = require('./../../shared/validation');
 var router = express.Router();
 
-/* GET register page. */
+/**
+ * Renders registration form.
+ */
 router.get('/', function(req, res, next) {
     if(req.user) {
         return res.render('account/info', {
@@ -18,6 +20,9 @@ router.get('/', function(req, res, next) {
     res.render('account/register');
 });
 
+/**
+ * Registers user.
+ */
 router.post('/', function(req, res, next) {
 
     let username = req.body.username;

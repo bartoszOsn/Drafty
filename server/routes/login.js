@@ -2,7 +2,10 @@ var express = require('express');
 const passport = require('passport');
 var router = express.Router();
 
-/* GET login page. */
+/**
+ * Renders page for login.
+ * If user is already logged in, then it renders info about it and link to home page
+ */
 router.get('/', function(req, res, next) {
     if(req.user) {
         return res.render('account/info', {
@@ -15,6 +18,9 @@ router.get('/', function(req, res, next) {
     return res.render('account/login');
 });
 
+/**
+ * Handles user logging in.
+ */
 router.post('/', function(req, res, next) {
   passport.authenticate('local', (err, user, info)=> {
     if(err) {
@@ -22,7 +28,7 @@ router.post('/', function(req, res, next) {
     }
 
     if(!user) {
-      return res.redirect('/login');
+      return res.redirect('/login', {waning: 'Wrong username or password.'});
     }
     req.logIn(user, function(err){
         if(err) {

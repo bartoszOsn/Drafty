@@ -11,16 +11,25 @@ const {isPasswordValid} = require('./../../shared/validation');
 var router = express.Router();
 
 
-
+// Creates transporter for sending mails.
+// TODO: Get options from config file.
 var transporter = nodemailer.createTransport({
     host: 'debugmail.io',
     port: 25,
     auth: mail
-  });
+});
 
+// Makes some functions work with `await`.
 const randomBytes = util.promisify(crypto.randomBytes);
 const sendMail = util.promisify((options, cb)=> transporter.sendMail(options, cb));
 
+/**
+ * Sends e-mail with link for changing password.
+ * @param {String} email address where mail should be sent.
+ * @param {*} token Token generated for user.
+ * @param {*} userID ID of user changing password.
+ * @param {*} hostname Hostname where server is running. Used to generate link.
+ */
 async function sendEmail(email, token, userID, hostname) {
     const link = `${hostname}/password/forgot/${userID}/${token}`;
     await sendMail({
@@ -32,9 +41,9 @@ async function sendEmail(email, token, userID, hostname) {
     });
 }
 
-/* 
-    displays a form for entering e-mail address where link will be send
-*/
+/**
+ * Renders a form for entering e-mail address where link should be sent.
+ */
 router.get('/forgot', (req, res, next)=> {
     if(req.user) {
         return res.redirect('/password/change');
@@ -43,8 +52,8 @@ router.get('/forgot', (req, res, next)=> {
 });
 
 /*
-    Sends link
-*/
+ * Sends link.
+ */
 router.post('/forgot', async (req, res, next) => {
     let email = req.body.email;
     let token = crypto.randomBytes(20).toString('hex');
@@ -64,6 +73,10 @@ router.post('/forgot', async (req, res, next) => {
     });
 });
 
+/**
+ * This is where link sent in e-mail is leading to.
+ * This route renders form for changing password, but only when username and token in url is valid.
+ */
 router.get('/forgot/:user/:token', async (req, res, next) => {
     const userID = req.params.user;
     const token = req.params.token;
@@ -92,6 +105,9 @@ router.get('/forgot/:user/:token', async (req, res, next) => {
     return res.render('account/new_password', {oldPassword: false});
 });
 
+/**
+ * Changes password, but only when username and token in url is valid.
+ */
 router.post('/forgot/:user/:token', async (req, res, next) => {
     const userID = req.params.user;
     const token = req.params.token;
