@@ -5,23 +5,23 @@ block head
 
 block content
     #app
-        h1.mx-3 Create account
+        h1 Create account
         form(method='post')
-            validated-textbox.mx-3.mt-3.mb-3(
+            validated-textbox.mt-3.mb-3(
                 type="text",
                 placeholder="Username",
                 name="username",
                 :validator="validateUsername",
                 @validation-changed="validUsername = $event"
             )
-            validated-textbox.mx-3.mb-3(
+            validated-textbox.mb-3(
                 :type="email",
                 placeholder="Email",
                 name="email",
                 :validator="validateEmail",
                 @validation-changed="validEmail = $event"
             )
-            validated-textbox.mx-3.mb-3(
+            validated-textbox.mb-3(
                 :type="showPassword?'text':'password'",
                 placeholder="Password",
                 name="password",
@@ -29,17 +29,17 @@ block content
                 v-model="password",
                 @validation-changed="validPassword = $event"
             )
-            validated-textbox.mx-3.mb-3(
+            validated-textbox.mb-3(
                 :type="showPassword?'text':'password'",
                 placeholder="Confirm Password",
                 name="confirm"
                 :validator="confirmPasswordValidation",
                 @validation-changed="validConfirmPassword = $event"
             )
-            .form-check.mx-3.mb-3
+            .form-check.mb-3
                 label.form-check-label Show password
                     input.form-check-input(type="checkbox" v-model="showPassword")
-            .d-grid.mx-3
+            .d-grid
                 button.btn-lg.btn-block(type="submit" class="btn btn-primary" :disabled="!validUsername || !validPassword || !validConfirmPassword") Create account
 block scripts
     script(src="/static/scripts/register.js")

@@ -25,7 +25,7 @@ block content
     #app
         h1.mx-3 Log in
         form(method='post')
-            div.mx-3.mt-3.mb-3.form-floating
+            div.mt-3.mb-3.form-floating
                 input.form-control(
                     type="text"
                     id="username-input"
@@ -34,7 +34,7 @@ block content
                     v-model="username"
                 )
                 label(:for="username-input") Username
-            div.mx-3.mb-1.form-floating
+            div.mb-1.form-floating
                 input.form-control(
                     :type="showPassword?'text':'password'"
                     id="password-input"
@@ -43,14 +43,14 @@ block content
                     v-model="password"
                 )
                 label(:for="username-input") Password
-            .form-check.mx-3.mb-3
+            .form-check.mb-3
                 label.form-check-label Show password?
                     input.form-check-input(type="checkbox" v-model="showPassword")
-            .d-grid.mx-3.mb-3
+            .d-grid.mb-3
                 button.btn.btn-primary.btn-lg(type="submit" :disabled="username.length == 0 || password.length == 0") Log in
-            p.mx-3.mb-1
+            p.mb-1
                 a.link-primary(href="#") Forgot password?
-            p.mx-3
+            p
                 span Don't have account? 
                 a.link-primary.bold(href="#") Sign up!
 block scripts

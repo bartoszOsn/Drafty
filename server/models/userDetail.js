@@ -10,6 +10,14 @@ const UserDetail = new Schema({
   screenplays: {
       type: [screenplaySchema],
       default: []
+  },
+  token: {
+      type: String,
+      default: null
+  },
+  tokenExpiration: {
+      type: Number,
+      default: Date.now
   }
 });
 

@@ -9,6 +9,7 @@ const indexRoute = require('./routes/index');
 const loginRoute = require('./routes/login');
 const logoutRoute = require('./routes/logout');
 const registerRoute = require('./routes/register');
+const passwordRoute = require('./routes/password');
 const apiRoute = require('./routes/API/index');
 
 const app = express();
@@ -53,6 +54,7 @@ app.use('/', indexRoute);
 app.use('/login', loginRoute);
 app.use('/logout', logoutRoute);
 app.use('/register', registerRoute);
+app.use('/password', passwordRoute);
 app.use('/API', apiRoute);
 
 app.listen(port, () => {
