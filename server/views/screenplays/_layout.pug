@@ -1,0 +1,27 @@
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet", href="/static/styles/theme.css")
+        link(rel="stylesheet", href="/static/styles/screenplayLayout.css")
+        block head
+    body
+        nav.navbar.navbar-expand.navbar-light.bg-light.shadow
+            //.strip
+            .container-fluid
+                a.navbar-brand.align-self-end.py-0(href="/")
+                    img(src="/static/images/logo-full.svg", alt="Drafty" height="30")
+                div.collapse.navbar-collapse
+                    block navbar
+
+                div.flex-shrink-0
+                    ul.navbar-nav
+                        li.nav-item
+                            div.navbar-text.me-3
+                                span Hello, 
+                                span.text-primary.fw-bolder #{user.username}
+                        li.nav-item
+                            a.btn.btn-outline-primary(href="/logout") Log out
+
+        block content
+        block scripts

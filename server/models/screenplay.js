@@ -14,7 +14,14 @@ const screenplaySchema = new Schema({
     /**
      * Name of screenplay.
      */
-    name: String
+    name: String,
+    /**
+     * Date of creation.
+     */
+    creationDate: {
+        type: Date,
+        default: ()=> new Date()
+    }
 });
 
 module.exports = screenplaySchema;

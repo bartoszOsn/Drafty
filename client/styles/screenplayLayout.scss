@@ -1,0 +1,17 @@
+@import "./colors.scss";
+
+.strip {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background-color: $primary;
+}
+
+// TODO: move it to separate file
+.script {
+    max-width: 150px;
+    width: 50%;
+    fill: currentColor;
+}

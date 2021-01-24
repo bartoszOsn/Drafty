@@ -11,6 +11,7 @@ const logoutRoute = require('./routes/logout');
 const registerRoute = require('./routes/register');
 const passwordRoute = require('./routes/password');
 const apiRoute = require('./routes/API/index');
+const screenplayRoute = require('./routes/screenplay/index');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -60,6 +61,7 @@ app.use('/logout', logoutRoute);
 app.use('/register', registerRoute);
 app.use('/password', passwordRoute);
 app.use('/API', apiRoute);
+app.use('/screenplay', screenplayRoute);
 
 // Starts listening
 app.listen(port, () => {

@@ -28,14 +28,14 @@ router.post('/', function(req, res, next) {
     }
 
     if(!user) {
-      return res.redirect('/login', {waning: 'Wrong username or password.'});
+      return res.render('account/login', {warning: 'Wrong username or password.'});
     }
     req.logIn(user, function(err){
         if(err) {
             return next(err);
         }
 
-        return res.redirect('/');
+        return res.redirect('/screenplay/view');
     })
 
   })(req, res, next);

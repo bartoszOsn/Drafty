@@ -75,7 +75,8 @@ const SASSConfig = {
     entry: {
         index: './client/styles/index.scss',
         theme: './client/styles/theme.scss',
-        accountLayout: './client/styles/accountLayout.scss'
+        accountLayout: './client/styles/accountLayout.scss',
+        screenplayLayout: './client/styles/screenplayLayout.scss'
     },
     output: {
         //filename: '[name].css',
