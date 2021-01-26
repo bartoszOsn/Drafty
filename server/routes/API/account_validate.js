@@ -1,10 +1,18 @@
+const UserDetails = require('./../../models/userDetail');
 const {isUsernameValid, isPasswordValid} = require('./../../../shared/validation');
 
 /**
  * route handler used for validation of login.
  */
-function validate_login_post(req, res) {
-    res.json(isUsernameValid(req.body.data));
+async function validate_login_post(req, res) {
+    const exist = await UserDetails.exists({username: req.body.data});
+    if(exist) {
+        return res.json({
+            result: false,
+            message: `Username "${req.body.data}" is already taken.`
+        });
+    }
+    return res.json(isUsernameValid(req.body.data));
 }
 
 /**
