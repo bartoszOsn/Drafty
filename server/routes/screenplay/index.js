@@ -8,5 +8,6 @@ var router = express.Router();
 require('./view')(router);
 require('./new')(router);
 require('./delete')(router);
+require('./edit')(router);
 
 module.exports = router;
