@@ -7,6 +7,6 @@ module.exports = function(router) {
         if(!req.user) {
             return res.redirect('/login');
         }
-        
+        return res.render('screenplays/edit', {user: req.user});
     });
 }

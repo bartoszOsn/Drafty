@@ -38,7 +38,8 @@ const JSConfig = {
     mode: mode,
     entry: {
         login: './client/login/index.js',
-        register: './client/register/index.js'
+        register: './client/register/index.js',
+        edit: './client/edit/index.js'
     },
     output: {
         filename: '[name].js',
