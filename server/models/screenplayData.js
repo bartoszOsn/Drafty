@@ -7,11 +7,11 @@ const Schema = mongoose.Schema;
  */
 const screenplayDataSchema = new Schema({
     content: [{
-        type: {type: String},
-        text: {type: String}
+        blockType: String,
+        blockText: String
     }]
 });
 
-const ScreenplayData = mongoose.model('screenplayContent', screenplayDataSchema);
+const ScreenplayData = mongoose.model('screenplayContent', screenplayDataSchema, 'screenplayContent');
 
 module.exports = ScreenplayData;

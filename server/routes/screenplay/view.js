@@ -9,7 +9,6 @@ module.exports = function(router) {
         }
 
         const screenplays = req.user.screenplays;
-        console.log(screenplays);
         res.render('screenplays/view', {user: req.user, screenplays});
     });
 }

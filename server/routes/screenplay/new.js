@@ -11,12 +11,16 @@ module.exports = function(router) {
         }
 
         const newData = new ScreenplayData({content: []});
-        await newData.save();
+        newData.save((err)=> {
+            console.log('saving error:');
+            console.log(err);
+        });
+        console.log(newData);
         req.user.screenplays.push({
             dataID: newData._id,
             name: "Untitled"
         });
-        req.user.save();
+        await req.user.save();
 
         return res.redirect('/screenplay/view');
     });
