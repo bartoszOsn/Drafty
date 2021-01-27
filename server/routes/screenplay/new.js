@@ -1,3 +1,5 @@
+const ScreenplayData = require('./../../models/screenplayData');
+
 module.exports = function(router) {
     /**
      * Creates new screenplay and then redirects to edition page.
@@ -8,8 +10,14 @@ module.exports = function(router) {
             return res.redirect('/login');
         }
 
-        const screenplays = req.user.screenplays;
-        console.log(screenplays);
-        res.render('screenplays/view', {user: req.user, screenplays});
+        const newData = new ScreenplayData({content: []});
+        await newData.save();
+        req.user.screenplays.push({
+            dataID: newData._id,
+            name: "Untitled"
+        });
+        req.user.save();
+
+        return res.redirect('/screenplay/view');
     });
 }

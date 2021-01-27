@@ -8,9 +8,9 @@ const Schema = mongoose.Schema;
  */
 const screenplaySchema = new Schema({
     /**
-     * Name of the JSON file stored on the server with data about screenplay
+     * ID of document containing screenplay data inside 'ScreenplayData' model
      */
-    filename: String,
+    dataID: Schema.Types.ObjectId,
     /**
      * Name of screenplay.
      */
