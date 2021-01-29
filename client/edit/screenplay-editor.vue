@@ -1,5 +1,9 @@
 <template lang="pug">
-    radio-menu(:options="lineTypes.map(t => t.name)")
+    .editor
+        portal(to="navbar")
+            //p This is just some test fo' fuck's sake.
+            radio-menu(:options="lineTypes.map(t => ({text: t.name, icon: t.icon}))", v-model="lineType")
+        //portal-target(name="navbar")
 </template>
 
 <script>
@@ -9,7 +13,8 @@ import RadioMenu from './radio-menu.vue'
 export default {
     data: function() {
         return {
-            lineTypes
+            lineTypes,
+            lineType: 0
         }
     },
     components: {
@@ -17,3 +22,6 @@ export default {
     }
 }
 </script>
+
+<style lang="scss" scoped>
+</style>

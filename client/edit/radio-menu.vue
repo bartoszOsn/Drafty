@@ -1,6 +1,12 @@
 <template lang="pug">
-    div.grid(:style="gridStyle")
-        button.btn.btn-outline-primary(v-for="value, index in options") {{value}}
+    div.buttons()
+        button.btn(
+            v-for="value, index in options",
+            :class="index == selectedIndex? 'btn-primary selected-button':'btn-outline-primary'",
+            @click="selected(index)"
+        )
+            span(:class="[value.icon, index == selectedIndex?'me-2':'']")
+            span(v-show="index == selectedIndex") {{value.text}}
 </template>
 
 <script>
@@ -17,13 +23,10 @@ export default {
          * Index of selected value.
          */
         selectedIndex: Number,
-        /**
-         * Number of columns in which grid of options will be arranged.
-         */
-        columns: {
-            type: Number,
-            default: 2
-        }
+    },
+    model: {
+        prop: 'selectedIndex',
+        event: 'selected'
     },
     computed: {
         gridStyle: function() {
@@ -40,8 +43,23 @@ export default {
 }
 </script>
 
-<style lang="scss">
-.grid {
-    display: grid;
+<style lang="scss" scoped>
+.buttons {
+    display: flex;
+    padding: 5px;
+
+    & > * {
+        flex: 0 1 0;
+        white-space: nowrap;
+        transition: 0.2s flex-grow, 0.2s flex-shrink;
+    }
+}
+
+.buttons > button + button {
+    margin-left: 0.5rem;
+}
+
+.buttons > .selected-button {
+    flex: 1 0 0;
 }
 </style>
