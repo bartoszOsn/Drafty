@@ -58,10 +58,19 @@ const JSConfig = {
             {
                 test: /\.pug$/,
                 loader: 'pug-plain-loader'
-            }
+            },
+            {
+                test: /\.scss$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader',
+                    'sass-loader'
+                ]
+              }
         ]
     },
     plugins: [
+        new MiniCssExtractPlugin(),
         new VueLoaderPlugin()
     ],
     resolve: {
