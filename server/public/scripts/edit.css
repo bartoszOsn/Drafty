@@ -1,15 +1,16 @@
 .buttons[data-v-a21fce40] {
   display: flex;
+  flex-direction: column;
   padding: 5px;
 }
 .buttons > *[data-v-a21fce40] {
-  flex: 0 1 0;
+  flex: 1 1 0;
   white-space: nowrap;
-  transition: 0.2s flex-grow, 0.2s flex-shrink;
 }
-.buttons > button + button[data-v-a21fce40] {
-  margin-left: 0.5rem;
+.buttons > * + *[data-v-a21fce40] {
+  margin-top: 0.5rem;
 }
-.buttons > .selected-button[data-v-a21fce40] {
-  flex: 1 0 0;
+.editor[data-v-82ad4dca] {
+  display: grid;
+  grid-template-columns: 200px 1fr;
 }

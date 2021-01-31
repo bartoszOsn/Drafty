@@ -1,12 +1,12 @@
 <template lang="pug">
-    div.buttons()
-        button.btn(
+    div.buttons.bg-light.shadow
+        button.btn.text-start.ps-4(
             v-for="value, index in options",
             :class="index == selectedIndex? 'btn-primary selected-button':'btn-outline-primary'",
             @click="selected(index)"
         )
-            span(:class="[value.icon, index == selectedIndex?'me-2':'']")
-            span(v-show="index == selectedIndex") {{value.text}}
+            span.me-2(:class="value.icon")
+            span {{value.text}}
 </template>
 
 <script>
@@ -46,20 +46,16 @@ export default {
 <style lang="scss" scoped>
 .buttons {
     display: flex;
+    flex-direction: column;
     padding: 5px;
 
     & > * {
-        flex: 0 1 0;
+        flex: 1 1 0;
         white-space: nowrap;
-        transition: 0.2s flex-grow, 0.2s flex-shrink;
     }
 }
 
-.buttons > button + button {
-    margin-left: 0.5rem;
-}
-
-.buttons > .selected-button {
-    flex: 1 0 0;
+.buttons > * + * {
+    margin-top: 0.5rem;
 }
 </style>
