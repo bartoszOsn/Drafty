@@ -10,6 +10,18 @@
 .buttons > * + *[data-v-a21fce40] {
   margin-top: 0.5rem;
 }
+.page[data-v-76137c84] {
+  width: 8.5in;
+  min-height: 11in;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 12pt;
+}
+div[contenteditable][data-v-76137c84]:hover {
+  background-color: rgba(255, 255, 0, 0.1);
+}
+div[contenteditable][data-v-76137c84]:focus {
+  background-color: rgba(255, 255, 0, 0.2);
+}
 .editor[data-v-82ad4dca] {
   display: grid;
   grid-template-columns: 200px 1fr;

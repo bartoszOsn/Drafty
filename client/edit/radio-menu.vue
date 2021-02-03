@@ -1,5 +1,5 @@
 <template lang="pug">
-    div.buttons.bg-light.shadow
+    div.buttons
         button.btn.text-start.ps-4(
             v-for="value, index in options",
             :class="index == selectedIndex? 'btn-primary selected-button':'btn-outline-primary'",
