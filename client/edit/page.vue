@@ -1,7 +1,15 @@
 <template lang="pug">
     div.page.shadow.border.mx-auto.my-4(:style="pageMargins")
-        contenteditable(tag="div", :contenteditable="true", v-model="test", :noNL="true", :noHTML="true")
-        contenteditable(tag="div", :contenteditable="true", v-model="test2", :noNL="true", :noHTML="true")
+        contenteditable(
+            v-for="paragraph, index in content",
+            :key="index"
+            tag="div",
+            :contenteditable="true",
+            :value="paragraph.text",
+            @input="updateParagraph($event, index)"
+            :noNL="true",
+            :noHTML="true"
+        )
 </template>
 
 <script>
@@ -17,6 +25,16 @@ export default {
                 'padding-bottom': pageData.margin[2] + 'in',
                 'padding-left': pageData.margin[3] + 'in',
             }
+        }
+    },
+    computed: {
+        content() {
+            return this.$store.state.content;
+        }
+    },
+    methods: {
+        updateParagraph(text, index) {
+            this.$store.commit('updateParagraph', {text, index});
         }
     }
 }
