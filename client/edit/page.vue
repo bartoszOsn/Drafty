@@ -1,15 +1,17 @@
 <template lang="pug">
     div.page.shadow.border.mx-auto.my-4(:style="pageMargins")
-        contenteditable(
+        editable-paragraph(
             v-for="paragraph, index in content",
-            :key="index"
-            ref="paragraph"
+            :key="index",
+            ref="paragraph",
             tag="div",
             :contenteditable="true",
             :value="paragraph.text",
-            :style="paragraphStyles[paragraph.type]"
-            @input="updateParagraph($event, index)"
-            @returned="newParagraph(index+1)"
+            :style="paragraphStyles[paragraph.type]",
+            @input="updateParagraph($event, index)",
+            @returned="newParagraph(index+1)",
+            @focus="focused(index)",
+            @blur="focusIndex = null",
             :noNL="true",
             :noHTML="true"
         )
@@ -18,6 +20,7 @@
 <script>
 import pageData from './../../shared/pageData';
 import lineTypes from './../../shared/lineTypes';
+import editableParagraph from './paragraph.vue';
 
 function toCSS(lineType) {
     return {
@@ -30,8 +33,7 @@ function toCSS(lineType) {
 export default {
     data() {
         return {
-            test: 'Hello',
-            test2: 'Hello',
+            focusIndex: null,
             pageMargins: {
                 'padding-top': pageData.margin[0] + 'in',
                 'padding-right': pageData.margin[1] + 'in',
@@ -57,7 +59,15 @@ export default {
                 }
             );
             setTimeout(()=>this.$refs.paragraph[index].$refs.element.focus(), 0);
+        },
+
+        focused(index) {
+            this.focusIndex = index;
+            console.log("focused: ", this.focusIndex);
         }
+    },
+    components: {
+        "editable-paragraph": editableParagraph
     }
 }
 </script>

@@ -22,6 +22,9 @@ export default {
                 type: type,
                 text: ''
             });
+        },
+        changeParagraphType(state, {index, type}) {
+            state.content[index].type = type;
         }
     }
 };
