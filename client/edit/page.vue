@@ -3,10 +3,13 @@
         contenteditable(
             v-for="paragraph, index in content",
             :key="index"
+            ref="paragraph"
             tag="div",
             :contenteditable="true",
             :value="paragraph.text",
+            :style="paragraphStyles[paragraph.type]"
             @input="updateParagraph($event, index)"
+            @returned="newParagraph(index+1)"
             :noNL="true",
             :noHTML="true"
         )
@@ -14,6 +17,16 @@
 
 <script>
 import pageData from './../../shared/pageData';
+import lineTypes from './../../shared/lineTypes';
+
+function toCSS(lineType) {
+    return {
+        'text-align': lineType['text-align'],
+        'margin': lineType.margin.map((t,i)=> t + ((i%2 == 0)?'rem':'in')).join(' '),
+        'text-transform': lineType.uppercase?'uppercase':'none'
+    };
+}
+
 export default {
     data() {
         return {
@@ -24,7 +37,8 @@ export default {
                 'padding-right': pageData.margin[1] + 'in',
                 'padding-bottom': pageData.margin[2] + 'in',
                 'padding-left': pageData.margin[3] + 'in',
-            }
+            },
+            paragraphStyles: lineTypes.reduce((res, val)=> ({...res, [val.name]: toCSS(val)}), {})
         }
     },
     computed: {
@@ -35,6 +49,14 @@ export default {
     methods: {
         updateParagraph(text, index) {
             this.$store.commit('updateParagraph', {text, index});
+        },
+        newParagraph(index) {
+            this.$store.commit('insertParagraph', {
+                index: index,
+                type: "Dialogue"
+                }
+            );
+            setTimeout(()=>this.$refs.paragraph[index].$refs.element.focus(), 0);
         }
     }
 }

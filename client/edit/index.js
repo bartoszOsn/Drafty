@@ -6,7 +6,6 @@ import ScreenplayEditor from './screenplay-editor.vue';
 
 Vue.use(PortalVue);
 Vue.use(Vuex);
-console.log(contenteditable);
 Vue.use(contenteditable);
 
 const store = new Vuex.Store({
@@ -14,7 +13,7 @@ const store = new Vuex.Store({
         content: [
             {
                 type: 'Scene',
-                text: "INT. DAY. SMALL ROOM THAT AT THE SURFACE LOOKS COZY, BUT THERE IS SOMETHING UNEASY IN HERE."
+                text: "Int. Day. Small room that at the surface looks cozy, but there is something uneasy in here."
             },
             {
                 type: 'Action',
@@ -25,6 +24,12 @@ const store = new Vuex.Store({
     mutations: {
         updateParagraph(state, {text, index}) {
             state.content[index].text = text;
+        },
+        insertParagraph(state, {index, type}) {
+            state.content.splice(index, 0, {
+                type: type,
+                text: ''
+            });
         }
     }
 })

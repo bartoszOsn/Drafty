@@ -16,42 +16,42 @@
 module.exports = [
     {
         "name": "Scene",
-        "text-transform": "uppercase",
+        "uppercase": true,
         "text-align": "left",
         "icon": "fas fa-image",
         "margin": [1, 0, 0, 0]
     },
     {
         "name": "Action",
-        "text-transform": "",
+        "uppercase": false,
         "text-align": "left",
         "icon": "fas fa-walking",
         "margin": [1, 0, 0, 0]
     },
     {
         "name": "Character Cue",
-        "text-transform": "uppercase",
+        "uppercase": true,
         "text-align": "left",
         "icon": "fas fa-user",
         "margin": [1, 0, 0, 2.8]
     },
     {
         "name": "Parenthetical",
-        "text-transform": "",
+        "uppercase": false,
         "text-align": "left",
         "icon": "fas fa-exclamation",
         "margin": [1, 1.9, 0, 2.1]
     },
     {
         "name": "Dialogue",
-        "text-transform": "",
+        "uppercase": false,
         "text-align": "left",
         "icon": "fas fa-comment",
         "margin": [1, 1.3, 0, 1.4]
     },
     {
         "name": "Transition",
-        "text-transform": "uppercase",
+        "uppercase": true,
         "text-align": "right",
         "icon": "fas fa-camera",
         "margin": [1, 0, 0, 4.5]
