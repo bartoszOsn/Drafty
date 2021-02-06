@@ -15,6 +15,7 @@
                 @focus="focused(index)",
                 @keydown.tab.exact.prevent="tranformForward(index)",
                 @keydown.tab.shift.exact.prevent="transformBackward(index)",
+                @keydown.backspace="onBackspace($event, index)"
                 
                 :noNL="true",
                 :noHTML="true"
@@ -22,6 +23,9 @@
 </template>
 
 <script>
+//TODO: navigate in script by arrows.
+//TODO: backspace removes a paragraph.
+
 import pageData from './../../shared/pageData';
 import lineTypes from './../../shared/lineTypes';
 import editableParagraph from './paragraph.vue';
@@ -88,10 +92,41 @@ export default {
             const nextType = lineTypes.find(t=> t.name == prevType)["tab-shift-transform"];
             this.$store.commit('changeParagraphType', {index, type: nextType});
         },
-
+        onBackspace(event, index) {
+            const selection = getSelection();
+            if(selection.type == "Caret") {
+                if(selection.anchorOffset == 0) {
+                    if(index == 0) {
+                        return;
+                    }
+                    let text = this.$store.state.content[index - 1].text;
+                    const pos = text.length;
+                    text += this.$store.state.content[index].text
+                    this.$store.commit('updateParagraph', {
+                        index: index-1,
+                        text: text
+                    });
+                    this.$store.commit('removeParagraph', {index});
+                    event.preventDefault();
+                    this.$nextTick(()=> {
+                        this.setCaret(this.$refs.paragraph[index - 1].$refs.editable.$refs.element, pos);
+                    });
+                }
+            }
+        },
         focused(index) {
             this.focusIndex = index;
             console.log("focused: ", this.focusIndex);
+        },
+        setCaret(elem, caretPos) {
+            var range = document.createRange();
+            var sel = window.getSelection();
+            
+            range.setStart(elem.childNodes[0], caretPos);
+            range.collapse(true);
+            
+            sel.removeAllRanges();
+            sel.addRange(range);
         }
     },
     components: {

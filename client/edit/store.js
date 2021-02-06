@@ -13,7 +13,7 @@ export default {
             }
         ],
         focusedParagraphIndex: null,
-        loading: true
+        loading: false
     },
     mutations: {
         updateParagraph(state, {text, index}) {
@@ -27,6 +27,9 @@ export default {
         },
         changeParagraphType(state, {index, type}) {
             state.content[index].type = type;
+        },
+        removeParagraph(state, {index}) {
+            state.content.splice(index, 1);
         },
         updateFocus(state, {index}) {
             state.focusedParagraphIndex = index;
