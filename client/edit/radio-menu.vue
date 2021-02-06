@@ -2,8 +2,8 @@
     div.buttons
         button.btn.text-start.ps-4(
             v-for="value, index in options",
-            :class="index == selectedIndex? 'btn-primary selected-button':'btn-outline-primary'",
-            @click="selected(index)"
+            :class="value.text == selectedValue? 'btn-primary selected-button':'btn-outline-primary'",
+            @mousedown.stop.prevent="selected(value.text)"
         )
             span.me-2(:class="value.icon")
             span {{value.text}}
@@ -20,12 +20,12 @@ export default {
             requred: true
         },
         /**
-         * Index of selected value.
+         * Selected value.
          */
-        selectedIndex: Number,
+        selectedValue: null,
     },
     model: {
-        prop: 'selectedIndex',
+        prop: 'selectedValue',
         event: 'selected'
     },
     computed: {
@@ -36,8 +36,8 @@ export default {
         }
     },
     methods: {
-        selected(index) {
-            this.$emit('selected', index);
+        selected(value) {
+            this.$emit('selected', value);
         }
     }
 }

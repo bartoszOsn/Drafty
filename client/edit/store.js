@@ -11,7 +11,8 @@ export default {
                 type: 'Action',
                 text: "At the bet sits little KID and, as it looks like at first glance, laughs. But if someone would watch longer, he would understand, that the kid actually cries."
             }
-        ]
+        ],
+        focusedParagraphIndex: null
     },
     mutations: {
         updateParagraph(state, {text, index}) {
@@ -25,6 +26,9 @@ export default {
         },
         changeParagraphType(state, {index, type}) {
             state.content[index].type = type;
+        },
+        updateFocus(state, {index}) {
+            state.focusedParagraphIndex = index;
         }
     }
 };

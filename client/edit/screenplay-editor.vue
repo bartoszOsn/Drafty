@@ -3,8 +3,7 @@
         portal(to="navbar")
             button.btn.btn-outline-primary.px-5 Save
         .bg-light.shadow
-            radio-menu.sticky-top(:options="lineTypes.map(t => ({text: t.name, icon: t.icon}))", v-model="lineType")
-
+            radio-menu.sticky-top(:options="lineTypes.map(t => ({text: t.name, icon: t.icon}))", v-model="currentParagraphType")
         editor-page
 </template>
 
@@ -17,7 +16,23 @@ export default {
     data: function() {
         return {
             lineTypes,
-            lineType: 0
+            lineType: 'Action'
+        }
+    },
+    computed: {
+        focusedParagraphIndex() {
+            return this.$store.state.focusedParagraphIndex
+        },
+        currentParagraphType: {
+            get() {
+                return this.$store.state.content[this.focusedParagraphIndex]?.type;
+            },
+            set(value) {
+                this.$store.commit('changeParagraphType', {
+                    index: this.$store.state.focusedParagraphIndex,
+                    type: value
+                });
+            }
         }
     },
     components: {

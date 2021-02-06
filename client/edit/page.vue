@@ -1,5 +1,6 @@
 <template lang="pug">
     div.page.shadow.border.mx-auto.my-4(:style="pageMargins")
+        //@blur="focusIndex = null",
         editable-paragraph(
             v-for="paragraph, index in content",
             :key="index",
@@ -11,7 +12,7 @@
             @input="updateParagraph($event, index)",
             @returned="newParagraph(index+1)",
             @focus="focused(index)",
-            @blur="focusIndex = null",
+            
             :noNL="true",
             :noHTML="true"
         )
@@ -33,7 +34,6 @@ function toCSS(lineType) {
 export default {
     data() {
         return {
-            focusIndex: null,
             pageMargins: {
                 'padding-top': pageData.margin[0] + 'in',
                 'padding-right': pageData.margin[1] + 'in',
@@ -46,6 +46,14 @@ export default {
     computed: {
         content() {
             return this.$store.state.content;
+        },
+        focusIndex: {
+            get() {
+                return this.$store.state.focusedParagraphIndex;
+            },
+            set(value) {
+                this.$store.commit('updateFocus', {index: value});
+            }
         }
     },
     methods: {
@@ -58,7 +66,9 @@ export default {
                 type: "Dialogue"
                 }
             );
-            setTimeout(()=>this.$refs.paragraph[index].$refs.element.focus(), 0);
+            this.$nextTick(()=> {
+                this.$refs.paragraph[index].$refs.editable.$refs.element.focus()
+            });
         },
 
         focused(index) {

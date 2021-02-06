@@ -40,14 +40,14 @@ module.exports = [
         "uppercase": false,
         "text-align": "left",
         "icon": "fas fa-exclamation",
-        "margin": [1, 1.9, 0, 2.1]
+        "margin": [0, 1.9, 0, 2.1]
     },
     {
         "name": "Dialogue",
         "uppercase": false,
         "text-align": "left",
         "icon": "fas fa-comment",
-        "margin": [1, 1.3, 0, 1.4]
+        "margin": [0, 1.3, 0, 1.4]
     },
     {
         "name": "Transition",
