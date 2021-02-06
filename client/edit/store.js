@@ -12,7 +12,8 @@ export default {
                 text: "At the bet sits little KID and, as it looks like at first glance, laughs. But if someone would watch longer, he would understand, that the kid actually cries."
             }
         ],
-        focusedParagraphIndex: null
+        focusedParagraphIndex: null,
+        loading: true
     },
     mutations: {
         updateParagraph(state, {text, index}) {

@@ -1,29 +1,31 @@
 <template lang="pug">
     div.page.shadow.border.mx-auto.my-4(:style="pageMargins")
-        //@blur="focusIndex = null",
-        editable-paragraph(
-            v-for="paragraph, index in content",
-            :key="index",
-            ref="paragraph",
-            tag="div",
-            :contenteditable="true",
-            :value="paragraph.text",
-            :style="paragraphStyles[paragraph.type]",
-            @input="updateParagraph($event, index)",
-            @returned="newParagraph(index+1)",
-            @focus="focused(index)",
-            @keydown.tab.exact.prevent="tranformForward(index)",
-            @keydown.tab.shift.exact.prevent="transformBackward(index)",
-            
-            :noNL="true",
-            :noHTML="true"
-        )
+        loading-indicator(v-if="loading")
+        template(v-else)
+            editable-paragraph(
+                v-for="paragraph, index in content",
+                :key="index",
+                ref="paragraph",
+                tag="div",
+                :contenteditable="true",
+                :value="paragraph.text",
+                :style="paragraphStyles[paragraph.type]",
+                @input="updateParagraph($event, index)",
+                @returned="newParagraph(index+1)",
+                @focus="focused(index)",
+                @keydown.tab.exact.prevent="tranformForward(index)",
+                @keydown.tab.shift.exact.prevent="transformBackward(index)",
+                
+                :noNL="true",
+                :noHTML="true"
+            )
 </template>
 
 <script>
 import pageData from './../../shared/pageData';
 import lineTypes from './../../shared/lineTypes';
 import editableParagraph from './paragraph.vue';
+import loadingIndicator from './loadingIndicator.vue';
 
 function toCSS(lineType) {
     return {
@@ -56,6 +58,9 @@ export default {
             set(value) {
                 this.$store.commit('updateFocus', {index: value});
             }
+        },
+        loading() {
+            return this.$store.state.loading
         }
     },
     methods: {
@@ -90,7 +95,8 @@ export default {
         }
     },
     components: {
-        "editable-paragraph": editableParagraph
+        "editable-paragraph": editableParagraph,
+        "loading-indicator": loadingIndicator
     }
 }
 </script>

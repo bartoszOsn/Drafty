@@ -10,6 +10,9 @@
 .buttons > * + *[data-v-a21fce40] {
   margin-top: 0.5rem;
 }
+.loader[data-v-4eeaba3c] {
+  font-size: 2rem;
+}
 .page[data-v-76137c84] {
   width: 8.5in;
   min-height: 11in;
