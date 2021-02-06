@@ -61,11 +61,14 @@ export default {
             this.$store.commit('updateParagraph', {text, index});
         },
         newParagraph(index) {
+            const prevType = this.$store.state.content[index-1].type;
+            
+            const nextType = lineTypes.find(t=> t.name == prevType)["next-paragraph"];
+            console.log(nextType);
             this.$store.commit('insertParagraph', {
                 index: index,
-                type: "Dialogue"
-                }
-            );
+                type: nextType
+            });
             this.$nextTick(()=> {
                 this.$refs.paragraph[index].$refs.editable.$refs.element.focus()
             });
