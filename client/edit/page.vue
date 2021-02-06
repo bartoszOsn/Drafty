@@ -12,6 +12,8 @@
             @input="updateParagraph($event, index)",
             @returned="newParagraph(index+1)",
             @focus="focused(index)",
+            @keydown.tab.exact.prevent="tranformForward(index)",
+            @keydown.tab.shift.exact.prevent="transformBackward(index)",
             
             :noNL="true",
             :noHTML="true"
@@ -62,9 +64,7 @@ export default {
         },
         newParagraph(index) {
             const prevType = this.$store.state.content[index-1].type;
-            
             const nextType = lineTypes.find(t=> t.name == prevType)["next-paragraph"];
-            console.log(nextType);
             this.$store.commit('insertParagraph', {
                 index: index,
                 type: nextType
@@ -72,6 +72,16 @@ export default {
             this.$nextTick(()=> {
                 this.$refs.paragraph[index].$refs.editable.$refs.element.focus()
             });
+        },
+        tranformForward(index) {
+            const prevType = this.$store.state.content[index].type;
+            const nextType = lineTypes.find(t=> t.name == prevType)["tab-transform"];
+            this.$store.commit('changeParagraphType', {index, type: nextType});
+        },
+        transformBackward(index) {
+            const prevType = this.$store.state.content[index].type;
+            const nextType = lineTypes.find(t=> t.name == prevType)["tab-shift-transform"];
+            this.$store.commit('changeParagraphType', {index, type: nextType});
         },
 
         focused(index) {

@@ -10,6 +10,8 @@
  *      "margin" - array of margin values, in order: [top, right, bottom, left].
  *          Horizontal values are in inches, while vertical is a number of lines.
  *      "next-paragraph" - name of the paragraph, that will be created by pressing enter inside this one.
+ *      "tab-transform" - in what type you will transform this one, if you will push tab key.
+ *      "tab-shift-transform" - in what type you will transform this one, if you will push tab+shift keys.
  *  }
  */
 
@@ -21,7 +23,9 @@ module.exports = [
         "text-align": "left",
         "icon": "fas fa-image",
         "margin": [1, 0, 0, 0],
-        "next-paragraph": "Action"
+        "next-paragraph": "Action",
+        "tab-transform": "Action",
+        "tab-shift-transform": "Scene"
     },
     {
         "name": "Action",
@@ -29,7 +33,9 @@ module.exports = [
         "text-align": "left",
         "icon": "fas fa-walking",
         "margin": [1, 0, 0, 0],
-        "next-paragraph": "Action"
+        "next-paragraph": "Action",
+        "tab-transform": "Character Cue",
+        "tab-shift-transform": "Scene"
     },
     {
         "name": "Character Cue",
@@ -37,7 +43,9 @@ module.exports = [
         "text-align": "left",
         "icon": "fas fa-user",
         "margin": [1, 0, 0, 2.8],
-        "next-paragraph": "Dialogue"
+        "next-paragraph": "Dialogue",
+        "tab-transform": "Transition",
+        "tab-shift-transform": "Action"
     },
     {
         "name": "Parenthetical",
@@ -45,7 +53,9 @@ module.exports = [
         "text-align": "left",
         "icon": "fas fa-exclamation",
         "margin": [0, 1.9, 0, 2.1],
-        "next-paragraph": "Dialogue"
+        "next-paragraph": "Dialogue",
+        "tab-transform": "Character Cue",
+        "tab-shift-transform": "Dialogue"
     },
     {
         "name": "Dialogue",
@@ -53,7 +63,9 @@ module.exports = [
         "text-align": "left",
         "icon": "fas fa-comment",
         "margin": [0, 1.3, 0, 1.4],
-        "next-paragraph": "Action"
+        "next-paragraph": "Action",
+        "tab-transform": "Parenthetical",
+        "tab-shift-transform": "Action"
     },
     {
         "name": "Transition",
@@ -61,6 +73,8 @@ module.exports = [
         "text-align": "right",
         "icon": "fas fa-camera",
         "margin": [1, 0, 0, 4.5],
-        "next-paragraph": "Action"
+        "next-paragraph": "Action",
+        "tab-transform": "Transition",
+        "tab-shift-transform": "Character Cue"
     },
 ]
