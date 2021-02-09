@@ -24,7 +24,6 @@
 
 <script>
 //TODO: navigate in script by arrows.
-//TODO: backspace removes a paragraph.
 
 import pageData from './../../shared/pageData';
 import lineTypes from './../../shared/lineTypes';
@@ -74,10 +73,25 @@ export default {
         newParagraph(index) {
             const prevType = this.$store.state.content[index-1].type;
             const nextType = lineTypes.find(t=> t.name == prevType)["next-paragraph"];
+
+            const selection = getSelection();
+
             this.$store.commit('insertParagraph', {
                 index: index,
                 type: nextType
             });
+            if(selection.type == 'Caret') {
+                const pos = selection.anchorOffset;
+                const text = this.$store.state.content[index - 1].text.substring(pos);
+                this.$store.commit('updateParagraph', {
+                        index: index-1,
+                        text: this.$store.state.content[index - 1].text.substring(0, pos)
+                    });
+                this.$store.commit('updateParagraph', {
+                        index: index,
+                        text: text
+                    });
+            }
             this.$nextTick(()=> {
                 this.$refs.paragraph[index].$refs.editable.$refs.element.focus()
             });
