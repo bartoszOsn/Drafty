@@ -1,7 +1,7 @@
 <template lang="pug">
     .editor
         portal(to="navbar")
-            button.btn.btn-outline-primary.px-5 Save
+            button.btn.btn-outline-primary.px-5(@click="save") Save
         .bg-light.shadow
             radio-menu.sticky-top(:options="lineTypes.map(t => ({text: t.name, icon: t.icon}))", v-model="currentParagraphType")
         editor-page
@@ -33,6 +33,22 @@ export default {
                     type: value
                 });
             }
+        }
+    },
+    methods: {
+        save() {
+            const data = this.$store.state.content;
+            const id = location.pathname.split('/').pop();
+            const body = JSON.stringify({content: data});
+            console.log(body);
+            fetch('../../API/screenplay/' + id, {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: "POST",
+                body: body
+            }).finally(console.log);
         }
     },
     components: {
