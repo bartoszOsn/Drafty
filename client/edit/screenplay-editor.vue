@@ -1,10 +1,8 @@
 <template lang="pug">
     .editor
-        portal(to="navbar")
-            button.btn.btn-outline-primary.px-5(@click="save") Save
         .bg-light.shadow
             div.d-grid.px-2.pt-2.sticky-top
-                save-button(:can-save="!modified", :saving="saving") Save
+                save-button(:can-save="modified", :saving="saving" @click="save") Save
                 hr
                 radio-menu(:options="lineTypes.map(t => ({text: t.name, icon: t.icon}))", v-model="currentParagraphType")
                 hr
@@ -53,19 +51,21 @@ export default {
         }
     },
     methods: {
-        save() {
+        async save() {
             const data = this.$store.state.content;
             const id = location.pathname.split('/').pop();
             const body = JSON.stringify({content: data});
-            console.log(body);
-            fetch('../../API/screenplay/' + id, {
+            this.$store.commit('updateSaving', {saving: true});
+            await fetch('../../API/screenplay/' + id, {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
                 method: "POST",
                 body: body
-            }).finally(console.log);
+            });
+            this.$store.commit('updateSaving', {saving: false});
+            this.$store.commit('resetModified');
         },
         async load() {
             const id = location.pathname.split('/').pop();
@@ -85,7 +85,7 @@ export default {
                 this.$store.commit('updateContent', data);
             }
             this.$store.commit('updateLoading', {loading: false});
-            
+            this.$store.commit('resetModified');
         }
     },
     mounted() {

@@ -1,5 +1,5 @@
 <template lang="pug">
-    button.btn(:class="canSave?'btn-primary':'btn-secondary'" :disabled="saving || !canSave")
+    button.btn.btn-primary(:disabled="saving || !canSave" v-on="$listeners")
         span.content(:style="{opacity: saving?0:1}")
             slot
         div.overlay.d-flex.justify-content-center.align-items-center(:style="{opacity: saving?1:0}")

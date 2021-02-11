@@ -11,21 +11,26 @@ export default {
     mutations: {
         updateContent(state, {content}) {
             state.content = content;
+            state.modified = true;
         },
         updateParagraph(state, {text, index}) {
             state.content[index].text = text;
+            state.modified = true;
         },
         insertParagraph(state, {index, type}) {
             state.content.splice(index, 0, {
                 type: type,
                 text: ''
             });
+            state.modified = true;
         },
         changeParagraphType(state, {index, type}) {
             state.content[index].type = type;
+            state.modified = true;
         },
         removeParagraph(state, {index}) {
             state.content.splice(index, 1);
+            state.modified = true;
         },
         updateFocus(state, {index}) {
             state.focusedParagraphIndex = index;
@@ -35,6 +40,9 @@ export default {
         },
         updateSaving(state, {saving}) {
             state.saving = saving;
+        },
+        resetModified(state) {
+            state.modified = false;
         }
     }
 };

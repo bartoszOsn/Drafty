@@ -21,7 +21,6 @@
     "nodemailer": "^6.4.17",
     "passport": "^0.4.1",
     "passport-local-mongoose": "^6.1.0",
-    "portal-vue": "^2.1.7",
     "vue": "^2.6.12",
     "vue-contenteditable": "^1.0.2",
     "vue-style-loader": "^4.1.2",
