@@ -1,0 +1,10 @@
+.all-content {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    align-items: stretch;
+    height: 100vh;
+}
+
+.all-content > :nth-child(2) {
+    overflow: hidden;
+}

@@ -3,14 +3,20 @@
         portal(to="navbar")
             button.btn.btn-outline-primary.px-5(@click="save") Save
         .bg-light.shadow
-            div.d-grid.mx-2.mt-2
+            div.d-grid.px-2.pt-2.sticky-top
                 save-button(:can-save="!modified", :saving="saving") Save
                 hr
-                radio-menu.sticky-top(:options="lineTypes.map(t => ({text: t.name, icon: t.icon}))", v-model="currentParagraphType")
-        editor-page
+                radio-menu(:options="lineTypes.map(t => ({text: t.name, icon: t.icon}))", v-model="currentParagraphType")
+                hr
+                label Zoom
+                    input.form-range(type="range" min="0.2" max="5" step="0.05" v-model="zoom")
+        div.page-area
+            editor-page.page(:style="{transform: `scale(${zoom}`}")
 </template>
 
 <script>
+// TODO: fix zoom
+
 import lineTypes from './../../shared/lineTypes';
 import RadioMenu from './radio-menu.vue'
 import EditorPage from './page.vue';
@@ -21,6 +27,7 @@ export default {
         return {
             lineTypes,
             lineType: 'Action',
+            zoom: 1
         }
     },
     computed: {
@@ -96,6 +103,11 @@ export default {
 .editor {
     display: grid;
     grid-template-columns: 200px 1fr;
+    max-height: 100%;
+    overflow: auto;
 }
 
+.page {
+    transform-origin: top center;
+}
 </style>

@@ -2,13 +2,14 @@ extends _layout.pug
 
 block head
     title Drafty
-    link(rel="stylesheet", href="/static/styles/screenplayView.css")
+    link(rel="stylesheet", href="/static/styles/screenplayEdit.css")
     link(rel="stylesheet", href="/static/scripts/edit.css")
     //link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/solid.min.css", integrity="sha512-xIEmv/u9DeZZRfvRS06QVP2C97Hs5i0ePXDooLa5ZPla3jOgPT/w6CzoSMPuRiumP7A/xhnUBxRmgWWwU26ZeQ==", crossorigin="anonymous")
     link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css", integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==", crossorigin="anonymous")
 
 block content
-    div#app
+    div
+        div#app
     script(src="/static/scripts/edit.js")
 
 block navbar

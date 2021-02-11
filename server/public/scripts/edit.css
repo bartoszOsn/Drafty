@@ -37,4 +37,9 @@ div[contenteditable][data-v-76137c84]:focus {
 .editor[data-v-82ad4dca] {
   display: grid;
   grid-template-columns: 200px 1fr;
+  max-height: 100%;
+  overflow: auto;
+}
+.page[data-v-82ad4dca] {
+  transform-origin: top center;
 }
