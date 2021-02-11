@@ -2,20 +2,16 @@ import Vuex from 'vuex';
 
 export default {
     state: {
-        content: [
-            {
-                type: 'Scene',
-                text: "Int. Day. Small room that at the surface looks cozy, but there is something uneasy in here."
-            },
-            {
-                type: 'Action',
-                text: "At the bet sits little KID and, as it looks like at first glance, laughs. But if someone would watch longer, he would understand, that the kid actually cries."
-            }
-        ],
+        content: [],
         focusedParagraphIndex: null,
-        loading: false
+        loading: true,
+        saving: false,
+        modified: false
     },
     mutations: {
+        updateContent(state, {content}) {
+            state.content = content;
+        },
         updateParagraph(state, {text, index}) {
             state.content[index].text = text;
         },
@@ -33,6 +29,12 @@ export default {
         },
         updateFocus(state, {index}) {
             state.focusedParagraphIndex = index;
+        },
+        updateLoading(state, {loading}) {
+            state.loading = loading;
+        },
+        updateSaving(state, {saving}) {
+            state.saving = saving;
         }
     }
 };

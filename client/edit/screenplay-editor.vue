@@ -3,7 +3,10 @@
         portal(to="navbar")
             button.btn.btn-outline-primary.px-5(@click="save") Save
         .bg-light.shadow
-            radio-menu.sticky-top(:options="lineTypes.map(t => ({text: t.name, icon: t.icon}))", v-model="currentParagraphType")
+            div.d-grid.mx-2.mt-2
+                save-button(:can-save="!modified", :saving="saving") Save
+                hr
+                radio-menu.sticky-top(:options="lineTypes.map(t => ({text: t.name, icon: t.icon}))", v-model="currentParagraphType")
         editor-page
 </template>
 
@@ -11,12 +14,13 @@
 import lineTypes from './../../shared/lineTypes';
 import RadioMenu from './radio-menu.vue'
 import EditorPage from './page.vue';
+import SaveButton from './saveButton.vue';
 
 export default {
     data: function() {
         return {
             lineTypes,
-            lineType: 'Action'
+            lineType: 'Action',
         }
     },
     computed: {
@@ -33,6 +37,12 @@ export default {
                     type: value
                 });
             }
+        },
+        saving() {
+            return this.$store.state.saving || this.$store.state.loading;
+        },
+        modified() {
+            return this.$store.state.modified;
         }
     },
     methods: {
@@ -49,11 +59,35 @@ export default {
                 method: "POST",
                 body: body
             }).finally(console.log);
+        },
+        async load() {
+            const id = location.pathname.split('/').pop();
+            this.$store.commit('updateLoading', {loading: true});
+            const response = await fetch('../../API/screenplay/' + id, {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: "GET"
+            });
+            const data = await response.json();
+            if(!data.content.length) {
+                this.$store.commit('insertParagraph', {index: 0, type: 'Scene'});
+            }
+            else {
+                this.$store.commit('updateContent', data);
+            }
+            this.$store.commit('updateLoading', {loading: false});
+            
         }
+    },
+    mounted() {
+        this.load();
     },
     components: {
         'radio-menu': RadioMenu,
-        'editor-page': EditorPage
+        'editor-page': EditorPage,
+        'save-button': SaveButton
     }
 }
 </script>
