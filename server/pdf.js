@@ -29,6 +29,11 @@ function addTitlePage(doc, title, author) {
         .text(author, options);
 }
 
+/**
+ * Adds script to pdf doc
+ * @param {PDFDocument} doc 
+ * @param {Array} script 
+ */
 function addScript(doc, script) {
     doc.addPage();
     for(let paragraph of script) {
@@ -37,7 +42,7 @@ function addScript(doc, script) {
 }
 
 /**
- * 
+ * Adds paragraph
  * @param {PDFDocument} doc - Document object
  * @param {string} type - type of paragraph
  * @param {string} text - text of paragraph
@@ -67,6 +72,13 @@ function addParagraph(doc, type, text) {
         .moveDown(lineType.margin[2]+1);
 }
 
+/**
+ * Creates pdf file.
+ * @param {string} path - path where file will be created, including file name
+ * @param {string} title - title written in titlepage
+ * @param {string} author - author written in titlepage
+ * @param {Array} script -content of the screenplay.
+ */
 function createPdf(path, title, author, script) {
     const doc = new PDFDocument({
         autoFirstPage: false,
