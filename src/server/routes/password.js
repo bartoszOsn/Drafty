@@ -6,7 +6,7 @@ const util = require('util');
 const pug = require('pug');
 const path = require('path');
 const UserDetails = require('./../models/userDetail');
-const { mail } = require('./../../secret');
+const { mail } = require('./../../../secret');
 const {isPasswordValid} = require('./../../shared/validation');
 var router = express.Router();
 

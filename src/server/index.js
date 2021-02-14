@@ -3,7 +3,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 
-const { sessionSecret } = require('./../secret');
+const { sessionSecret } = require('./../../secret');
 
 const indexRoute = require('./routes/index');
 const loginRoute = require('./routes/login');

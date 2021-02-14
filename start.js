@@ -3,6 +3,7 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const IgnoreEmitPlugin = require('ignore-emit-webpack-plugin');
 const path = require('path');
+const fs = require('fs-extra');
 
 const mode = 'development';
 
@@ -31,19 +32,19 @@ function handleError(err, stats)
 
 function startServer()
 {
-    require('./server/index');
+    require('./dist/server/index');
 }
 
 const JSConfig = {
     mode: mode,
     entry: {
-        login: './client/login/index.js',
-        register: './client/register/index.js',
-        edit: './client/edit/index.js'
+        login: './src/client/login/index.js',
+        register: './src/client/register/index.js',
+        edit: './src/client/edit/index.js'
     },
     output: {
         filename: '[name].js',
-        path: path.resolve(__dirname, "server/public/scripts"),
+        path: path.resolve(__dirname, "dist/server/public/scripts"),
     },
     module: {
         rules: [
@@ -83,16 +84,16 @@ const JSConfig = {
 const SASSConfig = {
     mode: mode,
     entry: {
-        index: './client/styles/index.scss',
-        theme: './client/styles/theme.scss',
-        accountLayout: './client/styles/accountLayout.scss',
-        screenplayLayout: './client/styles/screenplayLayout.scss',
-        screenplayView: './client/styles/screenplayView.scss',
-        screenplayEdit: './client/styles/screenplayEdit.scss'
+        index: './src/client/styles/index.scss',
+        theme: './src/client/styles/theme.scss',
+        accountLayout: './src/client/styles/accountLayout.scss',
+        screenplayLayout: './src/client/styles/screenplayLayout.scss',
+        screenplayView: './src/client/styles/screenplayView.scss',
+        screenplayEdit: './src/client/styles/screenplayEdit.scss'
     },
     output: {
         //filename: '[name].css',
-        path: path.resolve(__dirname, "server/public/styles"),
+        path: path.resolve(__dirname, "dist/server/public/styles"),
     },
     module: {
         rules: [
@@ -112,8 +113,13 @@ const SASSConfig = {
     ],
 };
 
+fs.emptyDirSync('./dist');
+
+fs.copySync('./src/server', './dist/server');
+fs.copySync('./src/shared', './dist/shared');
 
 webpack([JSConfig, SASSConfig], (err, stats) => {
     let isOk = handleError(err, stats);
-    startServer();
+    if(isOk)
+        startServer();
 });
