@@ -4,7 +4,7 @@
  * Each object has following format:
  *  {
  *      "name" - name of line type.
- *      "text-transform" - if text should be uppercase then this value is "uppercase", otherwise it's empty string.
+ *      "upparcase" - if true, text should be uppercase.
  *      "text-align" - "left"/"right"/"center"
  *      "icon" - font awesome class names.
  *      "margin" - array of margin values, in order: [top, right, bottom, left].

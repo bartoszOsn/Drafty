@@ -145,7 +145,7 @@ eval("/**\r\n * This file provides array of objects giving info about types of l
   \****************************/
 /***/ ((module) => {
 
-eval("module.exports = {\n  margin: [1, 1, 1, 1.5]\n  /* Margin of page, in inches, in order: [top, right, bottom, left]*/\n\n};\n\n//# sourceURL=webpack://drafty/./shared/pageData.js?");
+eval("module.exports = {\n  size: [8, 11],\n\n  /* Size of page, in inches. */\n  margin: [1, 1, 1, 1.5]\n  /* Margin of page, in inches, in order: [top, right, bottom, left]*/\n\n};\n\n//# sourceURL=webpack://drafty/./shared/pageData.js?");
 
 /***/ }),
 

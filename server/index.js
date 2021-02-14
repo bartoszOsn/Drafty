@@ -63,6 +63,7 @@ app.use('/password', passwordRoute);
 app.use('/API', apiRoute);
 app.use('/screenplay', screenplayRoute);
 
+
 // Starts listening
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`)
