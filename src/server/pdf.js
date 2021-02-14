@@ -1,5 +1,6 @@
 const PDFDocument = require('pdfkit');
 const fs = require('fs');
+const path = require('path');
 const pageData = require('./../shared/pageData');
 const lineTypes = require('./../shared/lineTypes');
 
@@ -79,7 +80,7 @@ function addParagraph(doc, type, text) {
  * @param {string} author - author written in titlepage
  * @param {Array} script -content of the screenplay.
  */
-function createPdf(path, title, author, script) {
+function createPdf(filepath, title, author, script) {
     const doc = new PDFDocument({
         autoFirstPage: false,
         size: pageData.size.map(t=> inToPoints(t)),
@@ -93,10 +94,11 @@ function createPdf(path, title, author, script) {
     
 
     return new Promise((res, rej)=> {
-        const stream = fs.createWriteStream(path);
+        const stream = fs.createWriteStream(filepath);
         stream.addListener('close', ()=> res());
         doc.pipe(stream);
-        doc.font('Courier-Bold').fontSize(12);
+        doc.font(path.resolve(__dirname, './public/fonts/courier-prime-regular.ttf')).fontSize(12);
+        //doc.font('Courier-Bold').fontSize(12);
         addTitlePage(doc, title, author);
         addScript(doc, script);
         doc.end();

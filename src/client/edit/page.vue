@@ -151,10 +151,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
     .page {
         width: 8.5in;
         min-height: 11in;
-        font-family: 'Courier New', Courier, monospace;
+        font-family: 'Courier Prime';
         font-size: 12pt;
     }
 

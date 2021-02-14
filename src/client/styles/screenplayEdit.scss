@@ -1,3 +1,9 @@
+@font-face {
+    font-family: 'Courier Prime';
+    $src: unquote('url("/static/fonts/courier-prime-regular.ttf")');
+    src: $src;
+}
+
 .all-content {
     display: grid;
     grid-template-rows: auto minmax(0, 1fr);
