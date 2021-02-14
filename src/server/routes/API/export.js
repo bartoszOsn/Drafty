@@ -25,7 +25,7 @@ async function exportPdf(req, res) {
     const data = await ScreenplayData.findById(screenplayDataId);
 
     const filePath = path.resolve(__dirname, `./../../pdfs/${id}.pdf`);
-    createPdf(filePath, title, author, data.content);
+    await createPdf(filePath, title, author, data.content);
 
     return res.download(filePath, ()=> {
         //fs.unlinkSync(filePath);

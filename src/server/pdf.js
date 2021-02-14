@@ -90,14 +90,17 @@ function createPdf(path, title, author, script) {
             left: inToPoints(pageData.margin[3]),
         }
     });
+    
 
-    doc.pipe(fs.createWriteStream(path));
-
-    doc.font('Courier-Bold').fontSize(12);
-    addTitlePage(doc, title, author);
-    addScript(doc, script);
-    doc.end();
-    console.log(`[CREATED AT ${path}]`);
+    return new Promise((res, rej)=> {
+        const stream = fs.createWriteStream(path);
+        stream.addListener('close', ()=> res());
+        doc.pipe(stream);
+        doc.font('Courier-Bold').fontSize(12);
+        addTitlePage(doc, title, author);
+        addScript(doc, script);
+        doc.end();
+    })
 }
 
 module.exports = createPdf;
