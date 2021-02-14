@@ -96,8 +96,8 @@ function createPdf(path, title, author, script) {
     doc.font('Courier-Bold').fontSize(12);
     addTitlePage(doc, title, author);
     addScript(doc, script);
-
     doc.end();
+    console.log(`[CREATED AT ${path}]`);
 }
 
 module.exports = createPdf;
