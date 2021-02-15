@@ -1,12 +1,6 @@
 <template lang="pug">
     .editor
-        modal(
-            :title="'hello world!'",
-            :confirmButton="'Download'",
-            :shown="exportModalShown",
-            @close="exportModalShown = false"
-            )
-            p Hello, Helloooo
+        export-modal
         .bg-light.shadow
             div.d-grid.px-2.pt-2.sticky-top
                 save-button(:can-save="modified", :saving="saving" @click="save") Save
@@ -15,7 +9,7 @@
                 hr
                 tooltip(:text="'Save your document first!'", :enable="modified")
                     span.d-grid(tabindex=0)
-                        button.btn.btn-outline-primary(:disabled="modified" @click="exportModalShown = true") Export
+                        button.btn.btn-outline-primary(:disabled="modified" @click="showModal") Export
                 hr
                 label Zoom
                     input.form-range(type="range" min="0.2" max="5" step="0.05" v-model="zoom")
@@ -31,7 +25,7 @@ import RadioMenu from './radio-menu.vue'
 import EditorPage from './page.vue';
 import SaveButton from './saveButton.vue';
 import Tooltip from './tooltip';
-import Modal from './modal.vue';
+import exportModal from './export-modal.vue';
 
 export default {
     data: function() {
@@ -39,7 +33,6 @@ export default {
             lineTypes,
             lineType: 'Action',
             zoom: 1,
-            exportModalShown: false
         }
     },
     computed: {
@@ -100,6 +93,10 @@ export default {
             }
             this.$store.commit('updateLoading', {loading: false});
             this.$store.commit('resetModified');
+        },
+
+        showModal() {
+            this.$store.commit('updateExportModal', {shown: true});
         }
     },
     mounted() {
@@ -110,7 +107,7 @@ export default {
         'editor-page': EditorPage,
         'save-button': SaveButton,
         'tooltip': Tooltip,
-        'modal': Modal
+        'export-modal': exportModal
     }
 }
 </script>

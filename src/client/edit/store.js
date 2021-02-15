@@ -5,7 +5,8 @@ export default {
         loading: true,
         saving: false,
         modified: false,
-        screenplayId: null
+        screenplayId: null,
+        exportModalShown: false
     },
     mutations: {
         updateContent(state, {content}) {
@@ -45,6 +46,9 @@ export default {
         },
         updateId(state, {id}) {
             state.screenplayId = id;
+        },
+        updateExportModal(state, {shown}) {
+            state.exportModalShown = shown;
         }
     }
 };

@@ -4,8 +4,7 @@
             .modal-content
                 .modal-header
                     h5.modal-title {{title}}
-                    button.btn-close(@click="$emit('close')")
-                        span &times;
+                    button.btn-close(@click="$emit('close')" aria-label="Close")
                 .modal-body
                     slot
                 .modal-footer
