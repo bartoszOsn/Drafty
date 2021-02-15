@@ -6,6 +6,10 @@
                 hr
                 radio-menu(:options="lineTypes.map(t => ({text: t.name, icon: t.icon}))", v-model="currentParagraphType")
                 hr
+                tooltip(:text="'Save your document first!'", :enable="modified")
+                    span.d-grid(tabindex=0)
+                        button.btn.btn-outline-primary(:disabled="modified") Export
+                hr
                 label Zoom
                     input.form-range(type="range" min="0.2" max="5" step="0.05" v-model="zoom")
         div.page-area
@@ -19,6 +23,7 @@ import lineTypes from './../../shared/lineTypes';
 import RadioMenu from './radio-menu.vue'
 import EditorPage from './page.vue';
 import SaveButton from './saveButton.vue';
+import Tooltip from './tooltip';
 
 export default {
     data: function() {
@@ -94,7 +99,8 @@ export default {
     components: {
         'radio-menu': RadioMenu,
         'editor-page': EditorPage,
-        'save-button': SaveButton
+        'save-button': SaveButton,
+        'tooltip': Tooltip
     }
 }
 </script>
