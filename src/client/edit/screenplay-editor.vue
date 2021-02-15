@@ -53,7 +53,7 @@ export default {
     methods: {
         async save() {
             const data = this.$store.state.content;
-            const id = location.pathname.split('/').pop();
+            const id = this.$store.state.screenplayId;
             const body = JSON.stringify({content: data});
             this.$store.commit('updateSaving', {saving: true});
             await fetch('../../API/screenplay/' + id, {
@@ -68,7 +68,7 @@ export default {
             this.$store.commit('resetModified');
         },
         async load() {
-            const id = location.pathname.split('/').pop();
+            const id = this.$store.state.screenplayId;
             this.$store.commit('updateLoading', {loading: true});
             const response = await fetch('../../API/screenplay/' + id, {
                 headers: {

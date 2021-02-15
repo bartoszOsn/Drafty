@@ -1,12 +1,11 @@
-import Vuex from 'vuex';
-
 export default {
     state: {
         content: [],
         focusedParagraphIndex: null,
         loading: true,
         saving: false,
-        modified: false
+        modified: false,
+        screenplayId: null
     },
     mutations: {
         updateContent(state, {content}) {
@@ -43,6 +42,9 @@ export default {
         },
         resetModified(state) {
             state.modified = false;
+        },
+        updateId(state, {id}) {
+            state.screenplayId = id;
         }
     }
 };

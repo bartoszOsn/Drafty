@@ -9,6 +9,10 @@ Vue.use(contenteditable);
 
 const store = new Vuex.Store(storeOptions);
 
+store.commit('updateId', {
+    id: location.pathname.split('/').pop()
+});
+
 const app = new Vue({
     el: '#app',
     template: '<screenplay-editor />',
