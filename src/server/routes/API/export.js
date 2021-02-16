@@ -25,11 +25,11 @@ async function exportPdf(req, res) {
     const data = await ScreenplayData.findById(screenplayDataId);
 
     const filePath = path.resolve(__dirname, `./../../pdfs/${id}.pdf`);
+    const name = `${title.replace(/\W+/g, '_').toLowerCase()}.pdf`;
     await createPdf(filePath, title, author, data.content);
-
     return res.download(filePath, ()=> {
-        //fs.unlinkSync(filePath);
-    });
+        fs.unlinkSync(filePath);
+    }, name);
 }
 
 module.exports = function(router) {
