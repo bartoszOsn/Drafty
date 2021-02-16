@@ -34,3 +34,38 @@ body {
         margin: 0px auto;
     }
 }
+
+.text-wall {
+    --spacer: 9px;
+    @function font($mult) {
+        @return calc(#{$mult} * min(1vw, 9px));
+    } 
+    & > p {
+        margin: 0px;
+    }
+
+    & > p:nth-child(1) {
+        font-size: font(8);
+        line-height: 1;
+    }
+
+    & > p:nth-child(2) {
+        font-size: font(5.78);
+        line-height: 1;
+    }
+
+    & > p:nth-child(3) {
+        font-size: font(16);
+        line-height: 0.7;
+    }
+
+    & > p:nth-child(4) {
+        font-size: font(16.4);
+        line-height: 0.9;
+    }
+
+    & > p:nth-child(5) {
+        font-size: font(12);
+        line-height: 0.7;
+    }
+}
