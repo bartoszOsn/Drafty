@@ -91,6 +91,8 @@ export default {
             else {
                 this.$store.commit('updateContent', data);
             }
+            this.$store.commit('updateTitlepage', {author: data.author, title: data.title});
+
             this.$store.commit('updateLoading', {loading: false});
             this.$store.commit('resetModified');
         },

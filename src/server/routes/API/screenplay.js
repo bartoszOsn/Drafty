@@ -13,6 +13,8 @@ async function getScreenplay(req, res) {
     const processedData = {
         content: data.content.map(t=> ({text: t.blockText, type: t.blockType}))
     };
+    processedData.author = req.user.username;
+    processedData.title = screenplay.name;
     return res.json(processedData);
 }
 

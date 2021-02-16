@@ -116,7 +116,6 @@ const SASSConfig = {
     ],
 };
 
-console.clear();
 fs.emptyDirSync('./dist');
 
 fs.copySync('./src/server', './dist/server');

@@ -6,7 +6,9 @@ export default {
         saving: false,
         modified: false,
         screenplayId: null,
-        exportModalShown: false
+        exportModalShown: false,
+        title: '',
+        author: ''
     },
     mutations: {
         updateContent(state, {content}) {
@@ -49,6 +51,14 @@ export default {
         },
         updateExportModal(state, {shown}) {
             state.exportModalShown = shown;
+        },
+        updateTitlepage(state, {author, title}) {
+            if(author) {
+                state.author = author;
+            }
+            if(title) {
+                state.title = title;
+            }
         }
     }
 };
