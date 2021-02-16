@@ -3,6 +3,7 @@
         export-modal
         .bg-light.shadow
             div.d-grid.px-2.pt-2.sticky-top
+                name-input
                 save-button(:can-save="modified", :saving="saving" @click="save") Save
                 hr
                 radio-menu(:options="lineTypes.map(t => ({text: t.name, icon: t.icon}))", v-model="currentParagraphType")
@@ -26,6 +27,7 @@ import EditorPage from './page.vue';
 import SaveButton from './saveButton.vue';
 import Tooltip from './tooltip';
 import exportModal from './export-modal.vue';
+import NameInput from './name-input.vue';
 
 export default {
     data: function() {
@@ -109,7 +111,8 @@ export default {
         'editor-page': EditorPage,
         'save-button': SaveButton,
         'tooltip': Tooltip,
-        'export-modal': exportModal
+        'export-modal': exportModal,
+        'name-input': NameInput
     }
 }
 </script>
