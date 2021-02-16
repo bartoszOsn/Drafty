@@ -3,11 +3,38 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         title Drafty - best tool for aspiring screenwriters
+        link(rel="stylesheet", href="/static/styles/theme.css")
         link(rel="stylesheet", href="/static/styles/index.css")
         include ./favicon.pug
     body
-        h1 Drafty
-        if isLoggedIn 
-            p Hello #{user}!
-        else
-            p You are not logged in!
+        .bg-primary.pt-1
+        .text-center
+            .mt-5
+                img.img-fluid.hero(src="/static/images/typewriter.svg" alt="Typewriter")
+            .mt-5
+                img.img-fluid.logo(src="/static/images/logo-full.svg" alt="Drafty")
+            
+            .mt-3
+                if isLoggedIn
+                    h3 Hello #{user}!
+
+                div.d-grid.gap-2.d-sm-block.mx-3
+                    if isLoggedIn
+                        a.btn.btn-primary.me-sm-1(href="/screenplay/view") Enter editor
+                        a.btn.btn-secondary(href="/logout") Log out
+                    else
+                        a.btn.btn-primary.me-sm-1(href="/register") Create account 
+                        a.btn.btn-secondary(href="/login") Log in
+
+        .skewed.bg-primary
+            .skewed-content.text-white
+                .row
+                    .col 
+                    .col-auto 
+                        h1 Why do you need to use Drafty?
+                        p.fs-big Because it is #[span.fw-bold great] tool!
+                    .col
+
+        p.mb-0 Of course, you can use Word, but why would you do this to yourself?
+        p.mb-0 Why should you manually format every dialog and every character cue? Drafty will do this for you! 
+        p.mb-0 Why should you store your screenplays on your disc? Drafty can store it for you in the cloud, accessible from every place and from every device!
