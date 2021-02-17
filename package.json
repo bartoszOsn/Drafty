@@ -1,6 +1,6 @@
 {
   "name": "drafty",
-  "version": "0.1",
+  "version": "0.1.0",
   "description": "Web application for writing screenplays",
   "main": "start.js",
   "scripts": {

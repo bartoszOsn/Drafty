@@ -53,7 +53,17 @@ To run Drafty's server on your local machine you must have MongoDB installed.
 
 1. On your PC, open terminal and run: `git clone https://github.com/bartoszOsn/Drafty`. A folder called `drafty` will be created.
 2. Run `cd drafty` to enter project directory, and then `npm install` to install all dependencies.
-3. Run `npm start`. you will see output similiar to this:
+3. Create file `secret.js` in Drafty's directory and paste into it:
+    ```
+    exports.sessionSecret = '<random-string>';
+    exports.mail = {
+        user: '<email-login>',
+        pass: '<email-password>'
+    };
+    ```
+    Change the `<random string>` with, well... some random string. It will we used for hashing password.
+    If you want to be able to reset passwords, you must provide some e-mail account credentials. It will be used for sending mails with tokens allowing for changing password. If you're not planning to forget your password in the future, just leave it like that.
+4. Run `npm start`. you will see output similiar to this:
     ```
     [nodemon] 2.0.7
     [nodemon] to restart at any time, enter `rs`
@@ -62,6 +72,6 @@ To run Drafty's server on your local machine you must have MongoDB installed.
     [nodemon] starting `node start.js`
     Server listening at http://localhost:3000
     ```
-4. open link from last line (http://localhost:3000) in your browser.
+5. open link from last line (http://localhost:3000) in your browser.
    
 That's it! You should see now Drafty's home page.
