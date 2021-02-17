@@ -9,4 +9,16 @@
 </p>
 
 ## Summary
-Drafty is a web application made for writing screenplays. It was inspired by Google Docs and my will to find a new hobby.
+Drafty is a web application made for writing screenplays. It was inspired by Google Docs and my will to find a new hobby :smile:
+
+## Running Drafty locally
+
+### Requirements
+To run Drafty server on your local machine you must have installed MongoDB.
+
+### Setting up
+
+1. Fork this repository.
+2. On your PC, open terminal and run: `https://github.com/<your-github-username>/Drafty`. A folder called Drafty will be created.
+3. Run `cd Drafty` to enter project directory, and then `npm install` to install all dependencies.
+4. Run `npm start`.
