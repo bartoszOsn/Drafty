@@ -6,7 +6,7 @@ var router = express.Router();
  * Renders page for login.
  * If user is already logged in, then it renders info about it and link to home page
  */
-router.get('/', function(req, res, next) {
+router.get('/', function(req, res) {
     if(req.user) {
         return res.render('account/info', {
             msgHeader: "You are already logged in",
@@ -22,7 +22,7 @@ router.get('/', function(req, res, next) {
  * Handles user logging in.
  */
 router.post('/', function(req, res, next) {
-  passport.authenticate('local', (err, user, info)=> {
+  passport.authenticate('local', (err, user)=> {
     if(err) {
       next(err);
     }
