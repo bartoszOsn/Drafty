@@ -28,6 +28,7 @@ app.set('view engine', 'pug');
 
 // Hosts static files
 app.use('/static', express.static(path.join(__dirname, 'public')));
+app.use('/editor', express.static(path.join(__dirname, 'editor')));
 
 // Parses request body
 app.use(bodyParser.json());

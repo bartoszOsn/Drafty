@@ -5,7 +5,8 @@
   "main": "start.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --watch src start.js --ext *"
+    "serve": "./node_modules/.bin/concurrently \"node src/server/index.js\" \"cd src/client && npm run serve\"",
+    "build": "rimraf ./dist && copyfiles --up 1 \"src/server/**/*\" \"src/shared/**/*\" dist && cd src/client && npm run build"
   },
   "keywords": [
     "screenplay"
@@ -31,6 +32,8 @@
     "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
     "babel-loader": "^8.2.2",
+    "concurrently": "^6.0.0",
+    "copyfiles": "^2.4.1",
     "css-loader": "^5.0.1",
     "extract-loader": "^5.1.0",
     "fs-extra": "^9.1.0",
@@ -40,6 +43,7 @@
     "pug": "^3.0.0",
     "pug-loader": "^2.4.0",
     "pug-plain-loader": "^1.1.0",
+    "rimraf": "^3.0.2",
     "sass": "^1.32.4",
     "sass-loader": "^10.1.1",
     "vue-loader": "^15.9.6",
